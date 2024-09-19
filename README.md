@@ -2,9 +2,9 @@
 
 > A golang library for executing bash & powershell commands easily.
 
-goshell is a golang library for executing bash & powershell commands easily. It is a folked version of [goshell](https://github.com/jieliu2000/goshellell) by [abdfnx](https://github.com/abdfnx). The reason I folked it with a new name is that it seems abdfnx is not maintaining it anymore.
+goshell is a golang library for executing bash & powershell commands easily. It is a folked version of [gosh](https://github.com/abdfnx/gosh) by [abdfnx](https://github.com/abdfnx). The reason I folked it with a new name is that it seems abdfnx is not maintaining it anymore.
 
-Please note that goshell's API is NOT compatible with the original gosh API.
+**Please note that goshell's API is NOT compatible with the original gosh API**.
 
 ## Install
 
