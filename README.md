@@ -9,7 +9,7 @@ goshell is a golang library for executing bash & powershell commands easily. It 
 ## Install
 
 ```bash
-go get -v github.com/jieliu2000/goshellell
+go get -u github.com/jieliu2000/goshell
 ```
 
 ## Examples
@@ -23,7 +23,7 @@ import (
   "fmt"
   "log"
 
-  "github.com/jieliu2000/goshellell"
+  "github.com/jieliu2000/goshell"
 )
 
 // run a command
@@ -71,7 +71,7 @@ import (
   "fmt"
   "log"
 
-  "github.com/jieliu2000/goshellell"
+  "github.com/jieliu2000/goshell"
 )
 
 // run a command
@@ -104,7 +104,7 @@ import (
   "fmt"
   "log"
 
-  "github.com/jieliu2000/goshellell"
+  "github.com/jieliu2000/goshell"
 )
 
 // run a command
