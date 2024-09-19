@@ -1,4 +1,4 @@
-# goshellell
+# goshell
 
 > A golang library for executing bash & powershell commands easily.
 
