@@ -63,7 +63,7 @@ func PowershellOutput(command string) (string, string, error) {
 	return stdout.String(), stderr.String(), err
 }
 
-func PowershellOutputWithDir(command, dir string) (error, string, string) {
+func PowershellOutputWithDir(command, dir string) (string, string, error) {
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 
@@ -74,7 +74,7 @@ func PowershellOutputWithDir(command, dir string) (error, string, string) {
 
 	err := cmd.Run()
 
-	return err, stdout.String(), stderr.String()
+	return stdout.String(), stderr.String(), err
 }
 
 // `PowershellCommand` executes the powershell command.
@@ -106,6 +106,10 @@ func Exec(shell, command string) (string, string, error) {
 
 // `Run` executes the same command for shell and powershell
 func Run(cmd string) {
+	RunWithDir(cmd, "")
+}
+
+func RunWithDir(cmd, dir string) {
 	var (
 		out    string
 		errout string
@@ -113,9 +117,9 @@ func Run(cmd string) {
 	)
 
 	if runtime.GOOS == "windows" {
-		out, errout, err = PowershellOutput(cmd)
+		out, errout, err = PowershellOutputWithDir(cmd, dir)
 	} else {
-		out, errout, err = ShellOutput(cmd)
+		out, errout, err = ShellOutputWithDir(cmd, dir)
 	}
 
 	if err != nil {
@@ -128,6 +132,10 @@ func Run(cmd string) {
 
 // `RunOutput` returns the output of the shared command for shell and powershell
 func RunOutput(command string) (string, string, error) {
+	return RunOutputWithDir(command, "")
+}
+
+func RunOutputWithDir(command, dir string) (string, string, error) {
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 
@@ -140,6 +148,9 @@ func RunOutput(command string) (string, string, error) {
 	}
 	if cmd == nil {
 		return "", "", errors.New("command is nil")
+	}
+	if dir != "" {
+		cmd.Dir = dir
 	}
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
