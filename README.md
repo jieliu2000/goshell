@@ -1,11 +1,15 @@
-# gosh
+# goshellell
 
-> A golang library for executing bash & powershell commands easly.
+> A golang library for executing bash & powershell commands easily.
+
+goshell is a golang library for executing bash & powershell commands easily. It is a folked version of [goshell](https://github.com/jieliu2000/goshellell) by [abdfnx](https://github.com/abdfnx). The reason I folked it with a new name is that it seems abdfnx is not maintaining it anymore.
+
+Please note that goshell's API is NOT compatible with the original gosh API.
 
 ## Install
 
 ```bash
-go get -v github.com/abdfnx/gosh
+go get -v github.com/jieliu2000/goshellell
 ```
 
 ## Examples
@@ -19,14 +23,14 @@ import (
   "fmt"
   "log"
 
-  "github.com/abdfnx/gosh"
+  "github.com/jieliu2000/goshellell"
 )
 
 // run a command
-gosh.Run("git status")
+goshell.Run("git status")
 
 // run a command with output
-err, out, errout := gosh.RunOutput("echo 𝜋")
+err, out, errout := goshell.RunOutput("echo 𝜋")
 
 if err != nil {
   log.Printf("error: %v\n", err)
@@ -36,7 +40,7 @@ if err != nil {
 fmt.Print(out)
 ```
 
-### How `gosh.Run("COMMAND")` works ?
+### How `goshell.Run("COMMAND")` works ?
 
 ```go
 // `Run` executes the same command for shell and powershell
@@ -67,21 +71,21 @@ import (
   "fmt"
   "log"
 
-  "github.com/abdfnx/gosh"
+  "github.com/jieliu2000/goshellell"
 )
 
 // run a command
-gosh.PowershellCommand(`Write-Host "hello from powershell"`)
+goshell.PowershellCommand(`Write-Host "hello from powershell"`)
 
 // run a script
-gosh.PowershellCommand(`
+goshell.PowershellCommand(`
   $git_username = git config user.name
 
   Write-Host $git_username
 `)
 
 // run a command with output
-err, out, errout := gosh.PowershellOutput(`[System.Environment]::SetEnvironmentVariable("Path", $Env:Path + ";$APP_PATH\bin", [System.EnvironmentVariableTarget]::User)`)
+out, errout, err := goshell.PowershellOutput(`[System.Environment]::SetEnvironmentVariable("Path", $Env:Path + ";$APP_PATH\bin", [System.EnvironmentVariableTarget]::User)`)
 
 if err != nil {
   log.Printf("error: %v\n", err)
@@ -100,14 +104,14 @@ import (
   "fmt"
   "log"
 
-  "github.com/abdfnx/gosh"
+  "github.com/jieliu2000/goshellell"
 )
 
 // run a command
-gosh.ShellCommand(`echo "shell or bash?"`)
+goshell.ShellCommand(`echo "shell or bash?"`)
 
 // run a script
-gosh.ShellCommand(`
+goshell.ShellCommand(`
   mood="👨‍💻"
 
   if [ $mood != "😪" ]; then
@@ -116,7 +120,7 @@ gosh.ShellCommand(`
 `)
 
 // run a command with output
-err, out, errout := gosh.ShellOutput(`curl --silent "https://get-latest.onrender.com/docker/compose"`)
+out, errout, err := goshell.ShellOutput(`curl --silent "https://get-latest.onrender.com/docker/compose"`)
 
 if err != nil {
   log.Printf("error: %v\n", err)
