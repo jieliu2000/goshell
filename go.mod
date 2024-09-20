@@ -1,3 +1,3 @@
-module github.com/abdfnx/gosh
+module github.com/jieliu2000/shello
 
 go 1.19
