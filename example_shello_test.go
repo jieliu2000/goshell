@@ -8,10 +8,10 @@ import (
 )
 
 func ExampleRunOutput() {
-	fmt.Println("Example of echo 𝜋:")
+	fmt.Println("Example of echo x:")
 
 	// run a command with output
-	out, errout, err := shello.RunOutput("echo 𝜋")
+	out, errout, err := shello.RunOutput("echo x")
 	if err != nil {
 		log.Printf("error: %v\n", err)
 		fmt.Print(errout)
@@ -24,12 +24,12 @@ func ExampleRunOutput() {
 	fmt.Println("\nExample of run without TrimOutput:")
 	// run a command without trim output
 	shello.TrimOutput = false
-	out, errout, err = shello.RunOutput("echo 𝜋")
+	out, errout, err = shello.RunOutput("echo x")
 	fmt.Print(string(out))
 	// Output:
-	// Example of echo 𝜋:
-	// 𝜋
+	// Example of echo x:
+	// x
 	// Example of run without TrimOutput:
-	// 𝜋
+	// x
 
 }

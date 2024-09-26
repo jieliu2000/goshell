@@ -165,8 +165,8 @@ func TestPowershellOutputWithDir(t *testing.T) {
 	}
 
 	// Test PowershellOutputWithDir method with invalid directory
-	if _, _, err := shello.PowershellOutputWithDir("Write-Host Hello from PowershellOutputWithDir", "/invalid-directory"); err != nil {
-		t.Errorf("expected no error, got error: %v", err)
+	if _, _, err := shello.PowershellOutputWithDir("Write-Host Hello from PowershellOutputWithDir", "/invalid-directory"); err == nil {
+		t.Error("expected error because dir is invalid, got no error")
 	}
 }
 
