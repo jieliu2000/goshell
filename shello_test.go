@@ -174,6 +174,13 @@ func TestRun(t *testing.T) {
 	shello.Run("echo Hello from Run")
 }
 
+func TestRunMultipleLine(t *testing.T) {
+	out, _, _ := shello.RunOutput("echo Hello Line 1\necho Hello Line 2\necho Hello Line 3 ")
+	if !strings.Contains(out, "Hello Line 1") {
+		t.Error("output error")
+	}
+}
+
 func TestRunWithDir(t *testing.T) {
 	shello.RunWithDir("echo Hello from RunWithDir", ".")
 }
