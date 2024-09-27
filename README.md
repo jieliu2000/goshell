@@ -1,15 +1,15 @@
 # shello
 
 [![GoDoc](https://godoc.org/github.com/jieliu2000/shello?status.svg)](https://pkg.go.dev/github.com/jieliu2000/shello)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jieliu2000/shello)](https://goreportcard.com/jieliu2000/shello)
-
-
+[![Go Report Card](https://goreportcard.com/badge/github.com/jieliu2000/shello)](https://goreportcard.com/report/github.com/jieliu2000/shello)
 
 > A golang library for executing bash & powershell commands easily.
 
-shello is a golang library for executing bash & powershell commands easily. It is a folked version of [gosh](https://github.com/abdfnx/gosh) by [abdfnx](https://github.com/abdfnx). I folked gosh with a new name because it seems that abdfnx is not maintaining gosh anymore.
 
-**Please note that shello's API is NOT compatible with the original gosh API**.
+Shello is a Go library designed to make executing shell (bash) and PowerShell commands straightforward. It is a fork of [gosh](https://github.com/abdfnx/gosh) by [abdfnx](https://github.com/abdfnx), tailored with improvements and maintained for ongoing support.
+
+**Note:** Shello's API is not compatible with the original gosh API.
+
 
 ## Install
 
@@ -17,13 +17,23 @@ shello is a golang library for executing bash & powershell commands easily. It i
 go get -u github.com/jieliu2000/shello
 ```
 
-## Global Variables
+## Key Features
+* Execute shell and PowerShell commands with ease.
+* Automatic detection of the operating system to choose between shell or PowerShell.
+* Control over trimming of command output.
+* Support for running commands in specified directories.
+* Execute multiple commands within a single string.
 
-Shello has a global variable `shello.TrimOutput` which is used to trim the output of a command. By default, it is set to `true`, which means the output will be trimmed. You can set it to `false` if you want to keep the original output of a command.
+## Configuration
+
+Shello includes a global variable `TrimOutput` to control whether command output should be trimmed. By default, it is set to `true`.
 
 ```go
-shello.TrimOutput = false
+import "github.com/jieliu2000/shello"
+
+shello.TrimOutput = false // Disable trimming.
 ```
+
 
 ## Examples
 
@@ -49,27 +59,24 @@ package main
 import (
   "fmt"
   "log"
-
   "github.com/jieliu2000/shello"
 )
 
-// run a command
-shello.Run("git status")
+func main() {
+  // Execute a command without capturing output.
+  shello.Run("git status")
 
-// run a command with output
-out, errout, err := shello.RunOutput("echo 𝜋")
-
-if err != nil {
-  log.Printf("error: %v\n", err)
-  fmt.Print(errout)
+  // Execute a command and capture the output.
+  out, errout, err := shello.RunOutput("echo 𝜋")
+  if err != nil {
+    log.Printf("error: %v\n", err)
+    fmt.Print(errout)
+  }
+  fmt.Print(out)
 }
-
-fmt.Print(out)
 ```
 
-The xxxOutput methods will return three values: the output of the command, the error output and an error.
-
-### Speicify the directory for a command
+### Speicify the directory for command
 
 These methods can be used to specify the directory when running a comamnd:
 
@@ -87,76 +94,21 @@ shello.RunWithDir("ls", "/tmp/")
 
 You can simple pass a mulitple-line string to the shello methods to run mulitple commands together.
 ```go
-	out, _, _ := shello.RunOutput(`echo "Hello Line 1"
+out, _, _ := shello.RunOutput(`
+  echo "Hello Line 1"
   echo "Hello Line 2"
-  echo "Hello Line 3"`)
-
+  echo "Hello Line 3"
+`)
 ```
 
 ### Run Powershell Command(s)
 
 ```go
-package main
-
-import (
-  "fmt"
-  "log"
-
-  "github.com/jieliu2000/shello"
-)
-
-// run a command
 shello.PowershellCommand(`Write-Host "hello from powershell"`)
-
-// run a script
-shello.PowershellCommand(`
-  $git_username = git config user.name
-
-  Write-Host $git_username
-`)
-
-// run a command with output
-out, errout, err := shello.PowershellOutput(`[System.Environment]::SetEnvironmentVariable("Path", $Env:Path + ";$APP_PATH\bin", [System.EnvironmentVariableTarget]::User)`)
-
-if err != nil {
-  log.Printf("error: %v\n", err)
-  fmt.Print(errout)
-}
-
-fmt.Print(out)
 ```
 
 ### Run Bash/Shell Command(s)
 
 ```go
-package main
-
-import (
-  "fmt"
-  "log"
-
-  "github.com/jieliu2000/shello"
-)
-
-// run a command
 shello.ShellCommand(`echo "shell or bash?"`)
-
-// run a script
-shello.ShellCommand(`
-  mood="👨‍💻"
-
-  if [ $mood != "😪" ]; then
-    echo "still coding"
-  fi
-`)
-
-// run a command with output
-out, errout, err := shello.ShellOutput(`curl --silent "https://get-latest.onrender.com/docker/compose"`)
-
-if err != nil {
-  log.Printf("error: %v\n", err)
-  fmt.Print(errout)
-}
-
-fmt.Print(out)
 ```
