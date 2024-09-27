@@ -1,5 +1,10 @@
 # shello
 
+[![GoDoc](https://godoc.org/github.com/jieliu2000/shello?status.svg)](https://pkg.go.dev/github.com/jieliu2000/shello)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jieliu2000/shello)](https://goreportcard.com/jieliu2000/shello)
+
+
+
 > A golang library for executing bash & powershell commands easily.
 
 shello is a golang library for executing bash & powershell commands easily. It is a folked version of [gosh](https://github.com/abdfnx/gosh) by [abdfnx](https://github.com/abdfnx). I folked gosh with a new name because it seems that abdfnx is not maintaining gosh anymore.

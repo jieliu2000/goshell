@@ -24,7 +24,7 @@ func ExampleRunOutput() {
 	fmt.Println("\nExample of run without TrimOutput:")
 	// run a command without trim output
 	shello.TrimOutput = false
-	out, errout, err = shello.RunOutput("echo x")
+	out, _, _ = shello.RunOutput("echo x")
 	fmt.Print(string(out))
 	// Output:
 	// Example of echo x:
