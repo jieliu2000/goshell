@@ -1,4 +1,4 @@
-# shello
+# Shello
 
 [![GoDoc](https://godoc.org/github.com/jieliu2000/shello?status.svg)](https://pkg.go.dev/github.com/jieliu2000/shello)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jieliu2000/shello)](https://goreportcard.com/report/github.com/jieliu2000/shello)
