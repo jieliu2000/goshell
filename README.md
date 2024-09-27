@@ -37,21 +37,7 @@ shello.TrimOutput = false // Disable trimming.
 
 ## Examples
 
-### Run command
-
-These methods can be used to run a command without any returned output or error:
-- `shello.Run("COMMAND")`
-- `shello.ShellCommand("COMMAND")`
-- `shello.PowershellCommand("COMMAND")`
-
-These methods can be used to run a command with output:
-- `shello.RunOutput("COMMAND")`
-- `shello.ShellOutput("COMMAND")`
-- `shello.PowershellOutput("COMMAND")`
-
-Shello will automatically detect the OS and run the command for either bash or powershell if you use `shello.Run("COMMAND")` or `shello.RunOutput("COMMAND")`.
-
-These method will execute the command in the current directory by default. If you want to specify the directory for a command, see [Specify the directory for a command](#speicify-the-directory-for-a-command) below.
+###  Executing Commands
 
 ```go
 package main
@@ -76,7 +62,7 @@ func main() {
 }
 ```
 
-### Speicify the directory for command
+### Specifying Execution Directory
 
 These methods can be used to specify the directory when running a comamnd:
 
@@ -90,7 +76,7 @@ Example:
 shello.RunWithDir("ls", "/tmp/")
 ```
 
-### Run mulitple commands together
+### Running Multiple Commands
 
 ```go
 out, _, _ := shello.RunOutput(`
@@ -100,14 +86,18 @@ out, _, _ := shello.RunOutput(`
 `)
 ```
 
-### Run Powershell Command(s)
+### Executing PowerShell Commands
 
 ```go
 shello.PowershellCommand(`Write-Host "hello from powershell"`)
 ```
 
-### Run Bash/Shell Command(s)
+### Executing Bash/Shell Commands
 
 ```go
 shello.ShellCommand(`echo "shell or bash?"`)
 ```
+
+## License
+
+[Apache License 2.0](LICENSE) 
