@@ -1,3 +1,4 @@
+// This file was modified from https://github.com/abdfnx/gosh/blob/trunk/gosh.go. The methods signatures are NOT compatible with the original.
 package shello
 
 import (
@@ -9,16 +10,34 @@ import (
 	"strings"
 )
 
-// `ShellOutput` returns the output of shell command, and any errors.
+// ShellOutput function executes the provided shell command and returns the standard output, standard error, and any error encountered.
+// Parameters:
+// - command string: The shell command to be executed.
+// Return values:
+// - string: The standard output of the executed command.
+// - string: The standard error of the executed command.
+// - error: If an error occurs during execution, the corresponding error message is returned.
 func ShellOutput(command string) (string, string, error) {
 	return ShellOutputWithDir(command, "")
 }
 
+// ShellOutputWithDir executes a shell command in a specified directory and returns the standard output, standard error, and any error encountered.
+// Parameters:
+// - command string: The shell command to be executed.
+// - dir string: The directory in which the command should be executed.
+// Return values:
+// - string: The standard output of the executed command.
+// - string: The standard error of the executed command.
+// - error: If an error occurs during execution, the corresponding error message is returned.
 func ShellOutputWithDir(command, dir string) (string, string, error) {
 	return Exec("bash", command, dir)
 }
 
-// `ShellCommand` executes the shell command.
+// ShellCommand executes the given shell command and prints the output.
+// Parameters:
+// - command string: The shell command to be executed.
+// return value:
+// - None. The function does not return any value.
 func ShellCommand(command string) {
 	out, errout, err := ShellOutput(command)
 
@@ -29,16 +48,32 @@ func ShellCommand(command string) {
 	fmt.Print(out)
 }
 
-// `PowershellOutput` returns the output of powershell command, and any errors.
+// PowershellOutput is a function that executes a PowerShell command and returns its output.
+// It takes a string 'command' as input which represents the PowerShell command to be executed.
+// The function returns two strings: the first string represents the standard output of the command,
+// the second string represents the standard error output of the command,
+// and an error object which contains any error information that occurred during execution.
 func PowershellOutput(command string) (string, string, error) {
 	return PowershellOutputWithDir(command, "")
 }
 
+// PowershellOutputWithDir function executes a PowerShell command within a specified directory and returns the output.
+// Parameters:
+// - command string: The PowerShell command to be executed.
+// - dir string: The directory in which the command will be executed.
+// Return values:
+// - string: The standard output of the executed command.
+// - string: The standard error output of the executed command.
+// - error: If an error occurs during the execution, the corresponding error message is returned.
 func PowershellOutputWithDir(command, dir string) (string, string, error) {
 	return Exec("powershell.exe", command, dir)
 }
 
-// `PowershellCommand` executes the powershell command.
+// PowershellCommand executes a given Powershell command and prints the output.
+// Parameters:
+// - command string: The Powershell command to be executed.
+// return value:
+// - None. The function does not return any value.
 func PowershellCommand(command string) {
 	out, errout, err := PowershellOutput(command)
 
@@ -50,7 +85,15 @@ func PowershellCommand(command string) {
 	fmt.Print(out)
 }
 
-// `Exec` just exectes the command
+// Exec function executes a shell command and returns the standard output, standard error, and any error that occurred.
+// Parameters:
+// - shell string: The shell to be used for executing the command.
+// - command string: The command to be executed.
+// - dir string: The directory in which the command will be executed. If empty, the current directory will be used.
+// Return values:
+// - string: The standard output of the executed command.
+// - string: The standard error of the executed command.
+// - error: If an error occurs during the execution of the command, the corresponding error message is returned.
 func Exec(shell, command, dir string) (string, string, error) {
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
@@ -68,7 +111,9 @@ func Exec(shell, command, dir string) (string, string, error) {
 	return outputString(&stdout), outputString(&stderr), err
 }
 
-// `Run` executes the same command for shell and powershell
+// Run function executes the given command.
+// Parameters:
+// - cmd string: The command to be executed.
 func Run(cmd string) {
 	RunWithDir(cmd, "")
 }
@@ -102,7 +147,14 @@ func RunWithDir(cmd, dir string) {
 	fmt.Print(out)
 }
 
-// `RunOutput` returns the output of the shared command for shell and powershell
+// RunOutput runs the given command and returns its standard output, standard error, and any error encountered.
+// If the command is successful, the error will be nil.
+// Parameters:
+// - command string: The command to be executed.
+// Return values:
+// - string: The standard output of the command.
+// - string: The standard error of the command.
+// - error: If an error occurs, the corresponding error message is returned.
 func RunOutput(command string) (string, string, error) {
 	return RunOutputWithDir(command, "")
 }
