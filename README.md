@@ -92,7 +92,6 @@ shello.RunWithDir("ls", "/tmp/")
 
 ### Run mulitple commands together
 
-You can simple pass a mulitple-line string to the shello methods to run mulitple commands together.
 ```go
 out, _, _ := shello.RunOutput(`
   echo "Hello Line 1"
