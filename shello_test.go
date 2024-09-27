@@ -175,7 +175,7 @@ func TestRun(t *testing.T) {
 }
 
 func TestRunMultipleLine(t *testing.T) {
-	out, _, _ := shello.RunOutput("echo Hello Line 1\necho Hello Line 2\necho Hello Line 3 ")
+	out, _, _ := shello.RunOutput(`echo "Hello Line 1"\necho "Hello Line 2"\necho "Hello Line 3"`)
 	if !strings.Contains(out, "Hello Line 1") {
 		t.Error("output error")
 	}
